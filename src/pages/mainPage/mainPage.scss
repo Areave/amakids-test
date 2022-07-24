@@ -1,9 +1,9 @@
 @use '../../style/style' as styles;
 
-.mainPage {
+.main-page {
   @include styles.forRootElements;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
+  & .game-contaner {
+    height: 90%;
+    padding: 30px;
+  }
 }

@@ -1,6 +1,0 @@
-@use '../../style/style' as styles;
-
-.actionButton {
-  @include styles.purpleButton;
-  margin-bottom: 10px;
-}

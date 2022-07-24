@@ -1,0 +1,9 @@
+@use '../../style/style' as styles;
+
+.user-data {
+  padding-right: 20px !important;
+
+  & a {
+    margin-bottom: 20px;
+  }
+}

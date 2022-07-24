@@ -1,56 +1,93 @@
-import React from "react";
+import {MouseEventHandler} from "react";
 
 export namespace Types {
 
     export interface State {
-        readonly isAuthorized: boolean,
-        readonly isLoading: boolean,
-        readonly name: string,
-        readonly joke: string,
-        readonly isError: boolean,
-        readonly imageSrc: string,
-        readonly errorMessage: string
+        readonly interfaceData: InterfaceData,
+        readonly startPoint: Coordinates
+        readonly endPoint: Coordinates,
+        readonly isUserLoose: boolean,
+        readonly isUserWin: boolean,
+        path: Path
     }
-    export interface PageTitleState {
-        readonly title: string
-    }
-    export interface ImageCompState {
-        readonly imageSrc: string,
-        readonly setImageSrc: (imageSrc: string) => void,
-        readonly setError: (errorMessage: string) => void
-    }
+
     export interface Action {
-        type: string,
-        payload?: Object
+        readonly type: string,
+        readonly payload?: any
     }
-    export interface WelcomeCompProps {
-        setWelcomeAction: (name: string) => void,
-        name: string
+
+    export interface Coordinates {
+        xDimension: number,
+        yDimension: number
     }
-    export interface componentTitleCompProps {
+
+    export interface InterfaceData {
+        heightSize: number,
+        widthSize: number,
+        amountOfSteps: number,
+    }
+
+    export interface PageTitleState {
         title: string
     }
-    export interface NavigationButtonProps {
-        route: string,
-        title: string
+
+    export interface UserDataCompProps {
+        setAmountOfSteps: (value: number) => void,
+        setHeightSize: (value: number) => void,
+        setWidthSize: (value: number) => void,
+        resetPoints:()=>void
     }
-    export interface ActionButtonProps {
-        onClick: () => any,
+
+    export interface GameFieldCompProps {
+        interfaceData: InterfaceData,
+        startPoint: Coordinates,
+        setEndPoint: setPointFunction,
+        setPath: (path: Path) => void,
+        path: Path
+    }
+
+    export interface SelectUserDataProps {
+        options: selectOptions[],
+        defaultValue: selectOptions
+        callback: (args?: any) => void,
         label: string
     }
-    export interface ErrorState {
-        isError: boolean,
-        children?: React.ReactNode,
-        errorMessage?: string,
-        errorInfo?: any
+    export interface StepsWrapperCompProps {
+        amountOfSteps: number,
+        path: Path,
+        startPoint: Coordinates
+    }
+    export interface StepCompProps {
+        direction: string
+    }
+    export interface FieldsWrapperCompProps {
+        heightSize: number,
+        widthSize: number,
+        endPoint: Coordinates,
+        startPoint: Coordinates,
+        setStartPoint: setPointFunction,
+        setUserWin: (isUserWin: boolean) => void,
+        setUserLoose: (isUserLoose: boolean) => void
+    }
+    export interface FieldCompProps {
+        style: {
+            width: string
+        },
+        coordinates: Coordinates,
+        onClick: MouseEventHandler,
+        isStartPoint: boolean
+    }
+    export interface HintCompProps {
+        isUserWin: boolean,
+        isUserLoose: boolean,
+        startPoint: Coordinates
+    }
 
+    export interface selectOptions {
+        label: string,
+        value: number
     }
-    export interface ErrorPageProps {
-        errorMessage: string,
-        errorStack: any
-    }
-    export interface JokeCompProps {
-        setJokeAction: (name: string) => void,
-        joke: string
-    }
+    export type Path = string[];
+
+    type setPointFunction = (coordinates: Coordinates) => void;
 }

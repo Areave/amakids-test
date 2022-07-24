@@ -1,17 +1,15 @@
 import React from "react";
+import 'materialize-css'
 import './app.scss';
 import {Provider} from 'react-redux'
 import store from "../utils/store";
-import ErrorBoundary from "../pages/errorBoundary/errorBoundary";
 import MyRouter from "../utils/router";
 
 const App: React.FC<any> = () => {
     return <React.StrictMode>
-        {/*<ErrorBoundary>*/}
             <Provider store={store}>
                 <MyRouter/>
             </Provider>
-        {/*</ErrorBoundary>*/}
     </React.StrictMode>
 };
 
