@@ -2,12 +2,9 @@ import React, {useEffect} from 'react'
 import './gameFieldComp.scss'
 import {Types} from '../../utils/types'
 import {connect} from "react-redux";
-import FieldComp from "../fieldComp/fieldComp";
 import FieldsWrapperComp from "../fieldsWrapperComp/fieldsWrapperComp";
 import StepsWrapperComp from "../stepsWrapperComp/stepsWrapperComp";
 import {setEndPoint, setPath} from "../../utils/store/actionCreators";
-import * as exports from "webpack";
-import startupEntrypoint = exports.RuntimeGlobals.startupEntrypoint;
 
 const GameFieldComp: React.FC<Types.GameFieldCompProps> = ({interfaceData, startPoint, setEndPoint, setPath, path}) => {
 
@@ -77,20 +74,17 @@ const GameFieldComp: React.FC<Types.GameFieldCompProps> = ({interfaceData, start
             setPath(path);
             setEndPoint(calculatingEndPoint);
         }
-    }, [startPoint.xDimension && startPoint.yDimension, amountOfSteps]);
-
+    }, [startPoint.xDimension && startPoint.yDimension]);
 
     return <div className='game-field col m9 s6'>
         <FieldsWrapperComp widthSize={widthSize} heightSize={heightSize}/>
-        <StepsWrapperComp amountOfSteps={amountOfSteps} path={path} startPoint={startPoint}/>
+        <StepsWrapperComp path={path}/>
     </div>
 };
-
 
 const mapStateToProps = (state: Types.State) => {
     return {interfaceData: state.interfaceData, startPoint: state.startPoint, path: state.path}
 };
-
 const mapDispatchToProps = {setEndPoint, setPath};
 
 export default connect(mapStateToProps, mapDispatchToProps)(GameFieldComp);

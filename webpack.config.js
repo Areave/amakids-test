@@ -22,7 +22,8 @@ const copyPlugin = new CopyPlugin({
         {
             from: 'stub',
             to: 'assets/stub',
-            context: 'src/assets'
+            context: 'src/assets',
+            noErrorOnMissing: true
         }
     ]
 });

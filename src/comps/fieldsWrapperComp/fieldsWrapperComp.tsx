@@ -5,17 +5,19 @@ import FieldComp from "../fieldComp/fieldComp";
 import {connect} from "react-redux";
 import {setStartPoint, setUserWin, setUserLoose} from "../../utils/store/actionCreators";
 
-const FieldsWrapperComp: React.FC<Types.FieldsWrapperCompProps> = ({heightSize, widthSize, endPoint, startPoint, setStartPoint, setUserWin, setUserLoose}) => {
+const FieldsWrapperComp: React.FC<Types.FieldsWrapperCompProps> = ({heightSize, widthSize, endPoint,
+                                                                       startPoint, setStartPoint, setUserWin, setUserLoose, isUserWin}) => {
 
 
     function fieldClickHandler(coordinates: Types.Coordinates): void {
+        if (isUserWin) {
+            return;
+        }
         if (endPoint.xDimension && endPoint.yDimension) {
             if (checkForEqualCoordinates(coordinates, endPoint)) {
                 setUserWin(true);
-                setUserLoose(false);
             } else {
                 setUserLoose(true);
-                setUserWin(false);
             }
         } else {
             setStartPoint(coordinates);
@@ -27,7 +29,7 @@ const FieldsWrapperComp: React.FC<Types.FieldsWrapperCompProps> = ({heightSize, 
             fieldCoordinates.yDimension === coordinates.yDimension;
     }
 
-    function createFieldsArray() {
+    function createFieldsArray(heightSize: number, widthSize: number) {
         const divStyle = {
           width: 100/widthSize + '%',
         };
@@ -35,25 +37,25 @@ const FieldsWrapperComp: React.FC<Types.FieldsWrapperCompProps> = ({heightSize, 
         for (let i = 1; i <= heightSize; i++) {
             for (let j = 1; j <= widthSize; j++) {
                 const coordinates = {xDimension: j, yDimension: i};
-                const isStartPoint = checkForEqualCoordinates(coordinates, startPoint);
                 fieldsArray.push(<FieldComp onClick={() =>
                                             fieldClickHandler(coordinates)}
-                                            isStartPoint={isStartPoint}
-                                            coordinates={coordinates}
+                                            isStartPoint={checkForEqualCoordinates(coordinates, startPoint)}
+                                            isEndPoint={checkForEqualCoordinates(coordinates, endPoint)}
                                             style={divStyle}
-                                            key={JSON.stringify(coordinates)}/>)
+                                            isUserWin={isUserWin}
+                                            key={j + '-' + i}/>)
             }
         }
         return fieldsArray;
     }
 
     return <div className={`fields-wrapper raw`}>
-        {createFieldsArray()}
+        {heightSize && widthSize && createFieldsArray(heightSize, widthSize)}
     </div>
 };
 
 const mapStateToProps = (state: Types.State) => {
-    return {endPoint: state.endPoint, startPoint: state.startPoint}
+    return {endPoint: state.endPoint, startPoint: state.startPoint, isUserWin: state.isUserWin}
 };
 
 const mapDispatchToProps = {setStartPoint, setUserWin, setUserLoose};

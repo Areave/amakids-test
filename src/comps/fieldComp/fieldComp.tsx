@@ -1,14 +1,13 @@
 import React from 'react'
 import './fieldComp.scss'
 import {Types} from '../../utils/types'
-import {is} from "immutable";
 
-const FieldComp: React.FC<Types.FieldCompProps> = ({style, onClick, isStartPoint}) => {
+const FieldComp: React.FC<Types.FieldCompProps> = ({style, onClick, isStartPoint, isUserWin, isEndPoint}) => {
 
-    let icon = isStartPoint ? 'home' : '';
+    let icon = isUserWin && isEndPoint ? 'check' : isStartPoint ? 'home' : '';
 
     return <div style={style} className={'field col'}>
-        <div onClick={onClick} className="waves-effect waves-light field-button"><i className={'medium material-icons'}>{icon}</i></div>
+        <div onClick={onClick} className={'field-button' + (isUserWin ? '' : ' waves-effect waves-light')}><i className={'medium material-icons'}>{icon}</i></div>
     </div>
 };
 

@@ -3,7 +3,6 @@
 .main-page {
   @include styles.forRootElements;
   & .game-contaner {
-    height: 90%;
     padding: 30px;
   }
 }

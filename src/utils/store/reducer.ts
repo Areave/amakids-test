@@ -4,7 +4,7 @@ const initialState: Types.State = {
     interfaceData: {
         heightSize: 3,
         widthSize: 3,
-        amountOfSteps: 2,
+        amountOfSteps: 5,
     },
     startPoint: {
         xDimension: null,

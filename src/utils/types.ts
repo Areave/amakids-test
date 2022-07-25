@@ -50,12 +50,10 @@ export namespace Types {
         options: selectOptions[],
         defaultValue: selectOptions
         callback: (args?: any) => void,
-        label: string
+        label?: string
     }
     export interface StepsWrapperCompProps {
-        amountOfSteps: number,
-        path: Path,
-        startPoint: Coordinates
+        path: Path
     }
     export interface StepCompProps {
         direction: string
@@ -67,15 +65,17 @@ export namespace Types {
         startPoint: Coordinates,
         setStartPoint: setPointFunction,
         setUserWin: (isUserWin: boolean) => void,
-        setUserLoose: (isUserLoose: boolean) => void
+        setUserLoose: (isUserLoose: boolean) => void,
+        isUserWin: boolean
     }
     export interface FieldCompProps {
         style: {
             width: string
         },
-        coordinates: Coordinates,
         onClick: MouseEventHandler,
-        isStartPoint: boolean
+        isStartPoint: boolean,
+        isEndPoint: boolean,
+        isUserWin: boolean
     }
     export interface HintCompProps {
         isUserWin: boolean,
@@ -88,6 +88,11 @@ export namespace Types {
         value: number
     }
     export type Path = string[];
+
+    export type elementType = {
+        label?: string,
+        value: number
+    };
 
     type setPointFunction = (coordinates: Coordinates) => void;
 }

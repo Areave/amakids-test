@@ -12,3 +12,4 @@ declare module '*.svg' {
 declare module "*.jpg" {
     export default "" as string;
 }
+declare module 'react-key-index';
